@@ -2,6 +2,7 @@
 import 'source-map-support/register';
 import * as cdk from 'aws-cdk-lib';
 import { InfraStack } from '../lib/infra-stack';
+import { GithubActionStack } from '../lib/github-action-stack';
 
 const app = new cdk.App();
 new InfraStack(app, 'InfraStack', {
@@ -19,3 +20,11 @@ new InfraStack(app, 'InfraStack', {
 
   /* For more information, see https://docs.aws.amazon.com/cdk/latest/guide/environments.html */
 });
+
+new GithubActionStack(app, 'GitHubOpenIDConnect', {
+  env: { account: process.env.CDK_DEFAULT_ACCOUNT, region: process.env.CDK_DEFAULT_REGION },
+  repositoryConfig:[
+    {owner: 'rsarili', repo: 'github-actions'}
+  ],
+  deployRole: 'github-action'
+})
