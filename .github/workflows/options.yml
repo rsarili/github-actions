@@ -11,6 +11,7 @@ on:
         - cschleiden
       message:
         required: true
+        default: develop
       use-emoji:
         type: boolean
         description: Include 🎉🤣 emojis
